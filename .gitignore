@@ -1,0 +1,4 @@
+/target
+/.idea
+# We intentionally ignore Cargo.lock, as we use in-dev path dependencies
+/Cargo.lock
