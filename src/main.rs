@@ -36,13 +36,18 @@ static APP_ID: OnceLock<Id<ApplicationMarker>> = OnceLock::new();
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    let token = env::var("DISCORD_TOKEN")?;
-    let client = Arc::new(Client::new(token.clone()));
-    let mut shard = Shard::new(
-        ShardId::ONE,
-        token,
-        Intents::MESSAGE_CONTENT | Intents::GUILD_MESSAGES,
-    );
+    // Make it easier to verify that this bot doesn't do anything fishy with the token by moving it to a separate block.
+    // Even if the token would "survive" the move in `Shard::new`, it would be dropped at the end of the block.
+    let (client, mut shard) = {
+        let token = env::var("DISCORD_TOKEN")?;
+        let client = Arc::new(Client::new(token.clone()));
+        let shard = Shard::new(
+            ShardId::ONE,
+            token,
+            Intents::MESSAGE_CONTENT | Intents::GUILD_MESSAGES,
+        );
+        (client, shard)
+    };
 
     // Retrieve the application ID
     APP_ID
