@@ -23,7 +23,7 @@ The bot user requires the following permissions to read and send messages in a s
 The bot expects the parent directory to contain a clone of twilight. Specifically, it searches in
 `../twilight/twilight-{gateway,http,model}` for the respective crates. The clone should be checked out at the most
 recent commit of the Pull Request mentioned above. At the time of writing this README, that's commit
-`e8fffb2b86bff8050104afce2ea71353d526e15b`.
+`c9a1a7ff4eda4149d49e80724171484a252c102a`.
 
 If you have cloned your code in a different directory, simply change the `path` fields in `Cargo.toml` accordingly.
 

@@ -91,7 +91,7 @@ async fn send_select_menus(client: Arc<Client>, channel: Id<ChannelMarker>) {
             Component::ActionRow(ActionRow {
                 components: vec![Component::SelectMenu(SelectMenu {
                     custom_id: String::from("text-select"),
-                    data: SelectMenuData::Text(Box::new(TextSelectMenuData {
+                    data: SelectMenuData::Text(TextSelectMenuData {
                         options: vec![
                             SelectMenuOption {
                                 default: false,
@@ -121,7 +121,7 @@ async fn send_select_menus(client: Arc<Client>, channel: Id<ChannelMarker>) {
                                 description: Some(String::from("The baz")),
                             },
                         ],
-                    })),
+                    }),
                     disabled: false,
                     max_values: None,
                     min_values: None,
@@ -161,14 +161,14 @@ async fn send_select_menus(client: Arc<Client>, channel: Id<ChannelMarker>) {
             Component::ActionRow(ActionRow {
                 components: vec![Component::SelectMenu(SelectMenu {
                     custom_id: String::from("channel-select"),
-                    data: SelectMenuData::Channel(Box::new(ChannelSelectMenuData {
+                    data: SelectMenuData::Channel(ChannelSelectMenuData {
                         channel_types: Some(vec![
                             ChannelType::GuildText,
                             ChannelType::PublicThread,
                             ChannelType::PrivateThread,
                             ChannelType::GuildCategory,
                         ]),
-                    })),
+                    }),
                     disabled: false,
                     max_values: None,
                     min_values: None,
