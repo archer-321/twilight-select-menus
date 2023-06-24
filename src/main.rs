@@ -18,8 +18,7 @@ use twilight_gateway::Shard;
 use twilight_http::Client;
 use twilight_model::application::interaction::{InteractionData, InteractionType};
 use twilight_model::channel::message::component::{
-    ActionRow, ChannelSelectMenuData, SelectMenu, SelectMenuData, SelectMenuOption,
-    TextSelectMenuData,
+    ActionRow, SelectMenu, SelectMenuOption, SelectMenuType,
 };
 use twilight_model::channel::message::{AllowedMentions, Component, MessageFlags, ReactionType};
 use twilight_model::channel::ChannelType;
@@ -90,88 +89,94 @@ async fn send_select_menus(client: Arc<Client>, channel: Id<ChannelMarker>) {
         vec![
             Component::ActionRow(ActionRow {
                 components: vec![Component::SelectMenu(SelectMenu {
+                    channel_types: None,
                     custom_id: String::from("text-select"),
-                    data: SelectMenuData::Text(TextSelectMenuData {
-                        options: vec![
-                            SelectMenuOption {
-                                default: false,
-                                value: String::from("foo"),
-                                emoji: Some(ReactionType::Unicode {
-                                    name: String::from("🐕"),
-                                }),
-                                label: String::from("Foo"),
-                                description: Some(String::from("The foo")),
-                            },
-                            SelectMenuOption {
-                                default: false,
-                                value: String::from("bar"),
-                                emoji: Some(ReactionType::Unicode {
-                                    name: String::from("🦊"),
-                                }),
-                                label: String::from("Bar"),
-                                description: Some(String::from("The bar")),
-                            },
-                            SelectMenuOption {
-                                default: false,
-                                value: String::from("baz"),
-                                emoji: Some(ReactionType::Unicode {
-                                    name: String::from("🐈"),
-                                }),
-                                label: String::from("Baz"),
-                                description: Some(String::from("The baz")),
-                            },
-                        ],
-                    }),
                     disabled: false,
+                    kind: SelectMenuType::Text,
                     max_values: None,
                     min_values: None,
+                    options: Some(vec![
+                        SelectMenuOption {
+                            default: false,
+                            value: String::from("foo"),
+                            emoji: Some(ReactionType::Unicode {
+                                name: String::from("🐕"),
+                            }),
+                            label: String::from("Foo"),
+                            description: Some(String::from("The foo")),
+                        },
+                        SelectMenuOption {
+                            default: false,
+                            value: String::from("bar"),
+                            emoji: Some(ReactionType::Unicode {
+                                name: String::from("🦊"),
+                            }),
+                            label: String::from("Bar"),
+                            description: Some(String::from("The bar")),
+                        },
+                        SelectMenuOption {
+                            default: false,
+                            value: String::from("baz"),
+                            emoji: Some(ReactionType::Unicode {
+                                name: String::from("🐈"),
+                            }),
+                            label: String::from("Baz"),
+                            description: Some(String::from("The baz")),
+                        },
+                    ]),
                     placeholder: Some(String::from("Text select menu")),
                 })],
             }),
             Component::ActionRow(ActionRow {
                 components: vec![Component::SelectMenu(SelectMenu {
+                    channel_types: None,
                     custom_id: String::from("user-select"),
-                    data: SelectMenuData::User,
                     disabled: false,
+                    kind: SelectMenuType::User,
                     max_values: None,
                     min_values: None,
+                    options: None,
                     placeholder: Some(String::from("User select menu")),
                 })],
             }),
             Component::ActionRow(ActionRow {
                 components: vec![Component::SelectMenu(SelectMenu {
+                    channel_types: None,
                     custom_id: String::from("role-select"),
-                    data: SelectMenuData::Role,
                     disabled: false,
+                    kind: SelectMenuType::Role,
                     max_values: None,
                     min_values: None,
+                    options: None,
                     placeholder: Some(String::from("Role select menu")),
                 })],
             }),
             Component::ActionRow(ActionRow {
                 components: vec![Component::SelectMenu(SelectMenu {
+                    channel_types: None,
                     custom_id: String::from("mentionable-select"),
-                    data: SelectMenuData::Mentionable,
                     disabled: false,
+                    kind: SelectMenuType::Mentionable,
                     max_values: None,
                     min_values: None,
+                    options: None,
                     placeholder: Some(String::from("Mentionable select menu")),
                 })],
             }),
             Component::ActionRow(ActionRow {
                 components: vec![Component::SelectMenu(SelectMenu {
+                    channel_types: Some(vec![
+                        ChannelType::GuildText,
+                        ChannelType::PublicThread,
+                        ChannelType::PrivateThread,
+                        ChannelType::GuildCategory,
+                    ]),
                     custom_id: String::from("channel-select"),
-                    data: SelectMenuData::Channel(ChannelSelectMenuData {
-                        channel_types: Some(vec![
-                            ChannelType::GuildText,
-                            ChannelType::PublicThread,
-                            ChannelType::PrivateThread,
-                            ChannelType::GuildCategory,
-                        ]),
-                    }),
                     disabled: false,
+                    kind: SelectMenuType::Channel,
                     max_values: None,
                     min_values: None,
+                    options: None,
                     placeholder: Some(String::from("Channel select menu")),
                 })],
             }),
