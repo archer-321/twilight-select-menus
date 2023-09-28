@@ -1,17 +1,14 @@
 # About this repository
 
 This repository demonstrates how to use the new Discord select menu API introduced by
-[twilight-rs/twilight#2219](https://github.com/twilight-rs/twilight/pull/2219).
+[twilight-rs/twilight#2219](https://github.com/twilight-rs/twilight/pull/2219) and, now that this PR is merged,
+how the API introduced by [twilight-rs/twilight#2281](https://github.com/twilight-rs/twilight/pull/2281) is used.
 
 Most notably, the code in this repository is a _quick and dirty_ example and should not be used in production. Its sole
 purpose is to provide an example that allows others to test the new API with a real Discord bot. The bot doesn't
-implement any useful behaviour (outside testing) and doesn't use the new recommended slash commands.
+implement any useful behaviour (outside testing).
 
 ## Required intents and permissions
-
-This bot doesn't use the new slash commands system. Instead, it uses legacy text commands (specifically, `!select`).
-Thus, you'll need to run this bot with an application that has access to the
-[privileged `MESSAGE_CONTENT` intent](https://discord.com/developers/docs/topics/gateway#message-content-intent).
 
 The bot user requires the following permissions to read and send messages in a specific channel:
 
@@ -32,7 +29,7 @@ Next, run the bot with
 DISCORD_TOKEN='YoUrDisCoRdToKeN' cargo run
 ```
 
-You can then use `!select` in any channel the bot user can access.
+You can then use `/select` in any channel the bot user can access.
 
 ## Licence
 
