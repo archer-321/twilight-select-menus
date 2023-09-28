@@ -8,3 +8,4 @@ tokio = { version = "^1.28", features = ['macros', 'rt-multi-thread'] }
 twilight-gateway = { path = '../twilight/twilight-gateway' }
 twilight-http = { path = '../twilight/twilight-http' }
 twilight-model = { path = '../twilight/twilight-model' }
+twilight-util = { path = '../twilight/twilight-util', features = ['builder']}
